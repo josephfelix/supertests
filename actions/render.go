@@ -5,11 +5,11 @@ import (
 	"github.com/gobuffalo/packr/v2"
 )
 
-var r *render.Engine
+var renderer *render.Engine
 var assetsBox = packr.New("app:assets", "../public")
 
 func init() {
-	r = render.New(render.Options{
+	renderer = render.New(render.Options{
 		// HTML layout to be used for all HTML requests:
 		HTMLLayout: "application.plush.html",
 
