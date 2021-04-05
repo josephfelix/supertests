@@ -1,0 +1,10 @@
+create_table("tests") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("title", "string", {})
+	t.Column("cover", "string", {})
+	t.Column("slug", "string", {unique: true})
+	t.Column("description", "string", {})
+	t.Column("message", "string", {})
+	t.Column("class", "string", {})
+	t.timestamps()
+}

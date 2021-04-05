@@ -1,0 +1,12 @@
+create_table("users") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("name", "string", {})
+	t.Column("email", "string", {})
+	t.Column("gender", "string", {"null": true})
+	t.Column("age", "integer", {"null": true})
+	t.Column("cover", "string", {"null": true})
+	t.Column("favorite_athletes", "string", {"null": true})
+	t.Column("favorite_teams", "string", {"null": true})
+	t.timestamps()
+	t.Index("email", {"unique": true})
+}

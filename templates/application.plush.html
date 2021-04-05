@@ -3,19 +3,16 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>Buffalo - Supertests</title>
+    <title>Supertests | seu site de testes para facebook</title>
     <%= stylesheetTag("application.css") %>
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="<%= authenticity_token %>" />
     <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
   </head>
   <body>
-
-    <div class="container">
-      <%= partial("flash.html") %>
+    <%= partial("index/header.html") %>
       <%= yield %>
-    </div>
-
     <%= javascriptTag("application.js") %>
+    <%= partial("index/footer.html") %>
   </body>
 </html>

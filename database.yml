@@ -1,14 +1,14 @@
 ---
 development:
   dialect: postgres
-  database: supertests_development
-  user: postgres
-  password: postgres
+  database: supertests
+  user: supertests
+  password: supertests
   host: 127.0.0.1
   pool: 5
 
 test:
-  url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/supertests_test?sslmode=disable"}}
+  url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/blog_test?sslmode=disable"}}
 
 production:
-  url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/supertests_production?sslmode=disable"}}
+  url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/blog_production?sslmode=disable"}}

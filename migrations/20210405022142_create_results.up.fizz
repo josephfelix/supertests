@@ -1,0 +1,7 @@
+create_table("results") {
+	t.Column("id", "integer", {primary: true})
+	t.Column("userid", "uuid", {})
+	t.Column("guid", "uuid", {})
+	t.Column("result", "string", {})
+	t.timestamps()
+}

@@ -1,0 +1,11 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=supertests
+      - POSTGRES_USER=supertests
+      - POSTGRES_DB=supertests
+    ports:
+      - '5432:5432'
