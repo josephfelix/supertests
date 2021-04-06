@@ -1,5 +1,20 @@
 version: '3'
 services:
+  app:
+    image: gobuffalo/buffalo
+    working_dir: /src
+    command: bash -c "./wait-for.sh db:5432 && buffalo db migrate && buffalo dev"
+    networks:
+      - supertests
+    volumes:
+      - ./:/src
+    environment:
+      - ADDR=0.0.0.0
+    ports:
+      - '80:3000'
+      - '3000:3000'
+    depends_on:
+      - db
   db:
     image: postgres
     restart: always
@@ -7,5 +22,10 @@ services:
       - POSTGRES_PASSWORD=supertests
       - POSTGRES_USER=supertests
       - POSTGRES_DB=supertests
+    networks:
+      - supertests
     ports:
       - '5432:5432'
+networks:
+  supertests:
+    driver: bridge
