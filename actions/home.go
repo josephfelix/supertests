@@ -15,14 +15,16 @@ func HomeHandler(c buffalo.Context) error {
 func HomeLoad(context buffalo.Context) error {
 	limitParam := context.Param("limit")
 
-	limit, err := strconv.Atoi(limitParam)
-
-	if err != nil {
-		return err
-	}
-
 	tests := &models.Tests{}
-	query := models.DB.Order("created_at desc").Limit(limit)
+	query := models.DB.Order("created_at desc")
+
+	if limitParam != "" {
+		limit, err := strconv.Atoi(limitParam)
+
+		if err == nil {
+			query = query.Limit(limit)
+		}
+	}
 
 	if err := query.All(tests); err != nil {
 		return err
