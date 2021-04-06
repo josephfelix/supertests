@@ -1,6 +1,9 @@
-angular.module('supertests')
-    .controller('TesteController', function ($scope, $uibModal, $http, $location, $window) {
-
+angular.module("supertests").controller("TesteController", [
+    "$scope",
+    "$uibModal",
+    "$http",
+    "$window",
+    function ($scope, $uibModal, $http, $window) {
         var scope = $scope;
 
         /**
@@ -22,7 +25,7 @@ angular.module('supertests')
         $scope.checkConnection = function () {
             angular.element(document).ready(function () {
                 FB.getLoginStatus(function (response) {
-                    $scope.connected = (response.status === 'connected');
+                    $scope.connected = response.status === "connected";
                 });
             });
         };
@@ -45,7 +48,7 @@ angular.module('supertests')
          * estiver logado no facebook
          */
         $scope.realizarTeste = function (guid) {
-            $window.location.href = '/t/' + guid + '/l';
+            $window.location.href = "/t/" + guid + "/l";
         };
 
         /**
@@ -54,16 +57,21 @@ angular.module('supertests')
          */
         $scope.loginSite = function (guid) {
             $scope.loading = true;
-           /* var fields = [
+            /* var fields = [
                 'id', 'name', 'age_range', 'birthday', 'cover', 'email', 'favorite_teams',
                 'favorite_athletes', 'gender', 'context'
             ];*/
 
             var fields = [
-                'id', 'name', 'age_range', 'cover', 'email', 'gender', 'context'
+                "id",
+                "name",
+                "age_range",
+                "cover",
+                "email",
+                "gender",
+                "context",
             ];
-            FB.api('/me?fields=' + fields.join(','), function (response) {
-
+            FB.api("/me?fields=" + fields.join(","), function (response) {
                 var sucessoLogin = function (result) {
                     if (result.status) {
                         $scope.realizarTeste(guid);
@@ -76,11 +84,10 @@ angular.module('supertests')
                 var errorLogin = function () {
                     $scope.loading = false;
                     $scope.abrirModal();
-                    alert('Ocorreu um erro ao fazer login, tente novamente.');
+                    alert("Ocorreu um erro ao fazer login, tente novamente.");
                 };
 
-                $http.post('/login', response)
-                    .then(sucessoLogin, errorLogin);
+                $http.post("/login", response).then(sucessoLogin, errorLogin);
             });
         };
 
@@ -88,12 +95,15 @@ angular.module('supertests')
          * Realiza o login no facebook via JS SDK
          */
         $scope.loginFacebook = function (guid) {
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    $scope.fecharModal();
-                    $scope.loginSite(guid);
-                }
-            }, {scope: 'email'});
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {
+                        $scope.fecharModal();
+                        $scope.loginSite(guid);
+                    }
+                },
+                { scope: "email" }
+            );
         };
 
         /**
@@ -102,17 +112,16 @@ angular.module('supertests')
         $scope.abrirModal = function () {
             $uibModal.open({
                 animation: false,
-                templateUrl: 'conectar_facebook.html',
-                size: 'sm',
+                templateUrl: "conectar_facebook.html",
+                size: "sm",
                 controller: function ($scope, $uibModalInstance) {
-
                     $scope.fecharModal = function () {
                         $uibModalInstance.close();
                     };
 
                     $scope.loginFacebook = scope.loginFacebook;
                     scope.fecharModal = $scope.fecharModal;
-                }
+                },
             });
         };
 
@@ -122,15 +131,14 @@ angular.module('supertests')
         $scope.loadingtestes = true;
         $scope.testes = [];
         $scope.carregarTestes = function (active) {
-            $http.get('/l')
-                .then(function (json) {
-                    $scope.loadingtestes = false;
-                    for (var index in json.data) {
-                        if (json.data[index].id != active) {
-                            $scope.testes.push(json.data[index]);
-                        }
+            $http.get("/l").then(function (json) {
+                $scope.loadingtestes = false;
+                for (var index in json.data) {
+                    if (json.data[index].id != active) {
+                        $scope.testes.push(json.data[index]);
                     }
-                })
+                }
+            });
         };
-
-    });
+    },
+]);
