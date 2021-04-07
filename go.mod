@@ -13,14 +13,16 @@ require (
 	github.com/gobuffalo/fizz v1.13.0 // indirect
 	github.com/gobuffalo/flect v0.2.2 // indirect
 	github.com/gobuffalo/mw-csrf v0.0.0-20190129204204-25460a055517
-	github.com/gobuffalo/mw-forcessl v0.0.0-20180802152810-73921ae7a130
-	github.com/gobuffalo/mw-i18n v0.0.0-20190129204410-552713a3ebb4
-	github.com/gobuffalo/mw-paramlogger v0.0.0-20190129202837-395da1998525
-	github.com/gobuffalo/nulls v0.4.0 // indirect
+	github.com/gobuffalo/mw-forcessl v0.0.0-20190224202501-6d1ef7ffb276
+	github.com/gobuffalo/mw-i18n v0.0.0-20190224203426-337de00e4c33
+	github.com/gobuffalo/mw-paramlogger v0.0.0-20190224201358-0d45762ab655
+	github.com/gobuffalo/nulls v0.4.0
 	github.com/gobuffalo/packr/v2 v2.8.0
 	github.com/gobuffalo/plush/v4 v4.1.0 // indirect
+	github.com/gobuffalo/pop v4.13.1+incompatible
 	github.com/gobuffalo/pop/v5 v5.3.0
 	github.com/gobuffalo/suite v2.8.2+incompatible
+	github.com/gobuffalo/toodo v0.0.0-20190909201601-bda4e0f8ddaf
 	github.com/gobuffalo/validate/v3 v3.3.0
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/jackc/pgconn v1.8.1 // indirect
@@ -32,7 +34,7 @@ require (
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
-	github.com/unrolled/secure v0.0.0-20190103195806-76e6d4e9b90c
+	github.com/unrolled/secure v1.0.1
 	golang.org/x/net v0.0.0-20210331212208-0fccb6fa2b5c // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 	golang.org/x/sys v0.0.0-20210403161142-5e06dd20ab57 // indirect

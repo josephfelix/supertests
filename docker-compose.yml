@@ -3,7 +3,7 @@ services:
   app:
     image: gobuffalo/buffalo
     working_dir: /src
-    command: bash -c "./wait-for.sh db:5432 && buffalo db migrate && buffalo dev"
+    command: bash -c "./wait-for.sh db:5432 && buffalo db migrate && buffalo task db:seed && buffalo dev"
     networks:
       - supertests
     volumes:
@@ -11,7 +11,7 @@ services:
     environment:
       - ADDR=0.0.0.0
     ports:
-      - '80:3000'
+      - '1337:3000'
       - '3000:3000'
     depends_on:
       - db
