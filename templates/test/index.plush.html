@@ -11,13 +11,13 @@
 
                 <div class="teste-info" ng-show="!loading">
                     <div class="teste-shadow">
-                        <img src="{{$cover}}"/>
+                        <img src="<%= rootPath() %>upload/<%= test.Cover %>"/>
                         <h2 class="teste-title">
-                            <span>{{$title}}</span>
+                            <span><%= test.Title %></span>
                         </h2>
                     </div>
-                    <p class="teste-description">{{$description}}</p>
-                    <button class="btn btn-lg btn-iniciar-teste" ng-click="iniciar('{{$guid}}')">
+                    <p class="teste-description"><%= test.Description %></p>
+                    <button class="btn btn-lg btn-iniciar-teste" ng-click="iniciar('<%= test.Slug %>')">
                         Iniciar teste
                     </button>
                 </div>
@@ -34,7 +34,7 @@
         <p><strong>Carregando...</strong></p>
     </div>
 
-    <div class="mais-testes" ng-hide="loadingtestes" ng-init="carregarTestes('{{$id}}')">
+    <div class="mais-testes" ng-hide="loadingtestes" ng-init="carregarTestes('<%= test.ID %>')">
         <h3><strong>Recomendados</strong></h3>
         <hr />
         <div class="row">

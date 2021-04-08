@@ -1,6 +1,7 @@
 require("angular/angular.min.js");
+require("angularjs-ui-bootstrap/ui-bootstrap.min.js");
 
-angular.module('supertests', []);
+angular.module('supertests', ['ui.bootstrap']);
 
 const requireAll = (r) => { 
   r.keys().forEach(r); 
