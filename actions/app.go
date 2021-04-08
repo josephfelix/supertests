@@ -63,8 +63,8 @@ func App() *buffalo.App {
 		app.GET("/l", HomeLoad)
 		app.GET("/l/{limit}", HomeLoad)
 
-		app.GET("/t/{uuid}", TestIndex)
-		app.GET("/t/{guid}/r/{hash}", TestResult)
+		app.GET("/t/{slug}", TestIndex)
+		app.GET("/t/{slug}/r/{hash}", TestResult)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}

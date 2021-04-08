@@ -21,6 +21,18 @@ type Test struct {
 	UpdatedAt   time.Time `json:"updated_at" db:"updated_at"`
 }
 
+func (t Test) PrimaryKeyType() string {
+	return "string"
+}
+
+func (t Test) IDField() string {
+	return "slug"
+}
+
+func (t Test) TableName() string {
+	return "tests"
+}
+
 // String is not required by pop and may be deleted
 func (t Test) String() string {
 	jt, _ := json.Marshal(t)
