@@ -15,12 +15,12 @@ var _ = grift.Namespace("tests", func() {
 
 	grift.Desc("all", "Generate and compile tests")
 	grift.Add("all", func(c *grift.Context) error {
-		err := grift.Run("tests:generate", c)
+		err := grift.Run("tests:compile", c)
 		if err != nil {
 			return err
 		}
 
-		err = grift.Run("tests:compile", c)
+		err = grift.Run("tests:generate", c)
 		if err != nil {
 			return err
 		}

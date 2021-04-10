@@ -18,7 +18,7 @@ func Compile(c *grift.Context) error {
 	for test := range tests {
 		entry, output := lib.AssembleQuizPath(test)
 
-		command := fmt.Sprintf("go build -buildmode=plugin -o %v %v\n", output, entry)
+		command := fmt.Sprintf("go build -buildmode=plugin -o %v %v", output, entry)
 
 		_, stderr, err := lib.Shellout(command)
 
