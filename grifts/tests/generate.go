@@ -19,44 +19,51 @@ func Generate(c *grift.Context) error {
 		return err
 	}
 
-	for test := range tests {
-		_, output := lib.AssembleQuizPath(test)
+	return models.DB.Transaction(func(tx *pop.Connection) error {
 
-		p, err := plugin.Open(output)
+		for test := range tests {
+			_, output := lib.AssembleQuizPath(test)
 
-		if err != nil {
-			panic(err)
-		}
+			p, err := plugin.Open(output)
 
-		info, err := p.Lookup("Info")
-
-		if err != nil {
-			panic(err)
-		}
-
-		quizinfo := info.(func() quiz.Test)()
-
-		models.DB.Transaction(func(tx *pop.Connection) error {
-			quiztest := models.Test{
-				Title:       quizinfo.Title,
-				Slug:        quizinfo.Slug,
-				Cover:       quizinfo.Cover,
-				Description: quizinfo.Description,
-				Message:     quizinfo.Message,
-				Plugin:      output,
-				CreatedAt:   time.Now(),
-				UpdatedAt:   time.Now(),
+			if err != nil {
+				panic(err)
 			}
 
-			if err := tx.Create(&quiztest); err != nil {
+			info, err := p.Lookup("Info")
+
+			if err != nil {
+				panic(err)
+			}
+
+			quizinfo := info.(func() quiz.Test)()
+
+			exists, err := models.DB.Where("slug = ?", quizinfo.Slug).Exists(&models.Test{})
+
+			if err != nil {
 				return err
 			}
 
-			fmt.Printf("Registrado quiz: %v\n", quizinfo.Title)
+			if !exists {
+				quiztest := models.Test{
+					Title:       quizinfo.Title,
+					Slug:        quizinfo.Slug,
+					Cover:       quizinfo.Cover,
+					Description: quizinfo.Description,
+					Message:     quizinfo.Message,
+					Plugin:      output,
+					CreatedAt:   time.Now(),
+					UpdatedAt:   time.Now(),
+				}
 
-			return nil
-		})
-	}
+				if err := tx.Create(&quiztest); err != nil {
+					return err
+				}
 
-	return nil
+				fmt.Printf("Registrado quiz: %v\n", quizinfo.Slug)
+			}
+		}
+
+		return nil
+	})
 }
