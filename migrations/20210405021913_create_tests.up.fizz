@@ -5,6 +5,6 @@ create_table("tests") {
 	t.Column("slug", "string", {unique: true})
 	t.Column("description", "string", {})
 	t.Column("message", "string", {})
-	t.Column("class", "string", {})
+	t.Column("plugin", "string", {})
 	t.timestamps()
 }

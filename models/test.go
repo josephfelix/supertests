@@ -16,7 +16,7 @@ type Test struct {
 	Slug        string    `json:"slug" db:"slug"`
 	Description string    `json:"description" db:"description"`
 	Message     string    `json:"message" db:"message"`
-	Class       string    `json:"class" db:"class"`
+	Plugin      string    `json:"plugin" db:"plugin"`
 	CreatedAt   time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at" db:"updated_at"`
 }

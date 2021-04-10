@@ -2,20 +2,17 @@ package main
 
 import (
 	"fmt"
-	"supertests/models"
+	"supertests/quiz"
 )
 
-type Quiz string
+var user quiz.User
 
-var user models.User
-var QuizInfo Quiz
-
-func (g Quiz) Render() {
+func Render() {
 	fmt.Printf("Ola %v", user.Name)
 }
 
-func (g Quiz) Info() models.Test {
-	return models.Test{
+func Info() quiz.Test {
+	return quiz.Test{
 		Title:       "Quais Famosos estão te xavecando no whatsapp?",
 		Cover:       "o-que-os-famosos-estao-falando-sobre-voce/whatsappcapa.jpg",
 		Slug:        "quais-famosos-estao-te-xavecando-no-whatsapp",

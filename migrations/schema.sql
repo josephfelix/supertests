@@ -80,7 +80,7 @@ CREATE TABLE public.tests (
     slug character varying(255) NOT NULL,
     description character varying(255) NOT NULL,
     message character varying(255) NOT NULL,
-    class character varying(255) NOT NULL,
+    plugin character varying(255) NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
