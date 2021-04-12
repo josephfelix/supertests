@@ -16,29 +16,25 @@ angular.module("supertests").controller("TesteController", [
          * Status de login do usuário no facebook
          * @type {boolean}
          */
-        $scope.connected = false;
-
-        /**
-         * Checa se o usuário está conectado ao facebook
-         * para realização dos testes
-         */
-        $scope.checkConnection = function () {
-            angular.element(document).ready(function () {
-                FB.getLoginStatus(function (response) {
-                    $scope.connected = response.status === "connected";
-                });
-            });
-        };
+        $scope.facebookReady = false;
+        $scope.$watch(
+            function () {
+                return Facebook.isReady();
+            },
+            function (newVal) {
+                $scope.facebookReady = true;
+            }
+        );
 
         /**
          * Chamado ao usuário clicar no botão INICIAR TESTE
          */
-        $scope.iniciar = function (guid) {
-            if ($scope.connected && $window.logado) {
+        $scope.start = function (guid) {
+            if ($scope.facebookReady) {
                 $scope.loading = true;
-                $scope.realizarTeste(guid);
+                $scope.goToQuiz(guid);
             } else {
-                $scope.abrirModal();
+                $scope.openModal();
             }
         };
 
@@ -47,7 +43,7 @@ angular.module("supertests").controller("TesteController", [
          * este método só é chamado se o usuário
          * estiver logado no facebook
          */
-        $scope.realizarTeste = function (guid) {
+        $scope.goToQuiz = function (guid) {
             $window.location.href = "/t/" + guid + "/l";
         };
 
@@ -74,7 +70,7 @@ angular.module("supertests").controller("TesteController", [
             FB.api("/me?fields=" + fields.join(","), function (response) {
                 var sucessoLogin = function (result) {
                     if (result.status) {
-                        $scope.realizarTeste(guid);
+                        $scope.goToQuiz(guid);
                     } else {
                         $scope.loading = false;
                         alert(result.result);
@@ -83,7 +79,7 @@ angular.module("supertests").controller("TesteController", [
 
                 var errorLogin = function () {
                     $scope.loading = false;
-                    $scope.abrirModal();
+                    $scope.openModal();
                     alert("Ocorreu um erro ao fazer login, tente novamente.");
                 };
 
@@ -98,7 +94,7 @@ angular.module("supertests").controller("TesteController", [
             FB.login(
                 function (response) {
                     if (response.authResponse) {
-                        $scope.fecharModal();
+                        $scope.closeModal();
                         $scope.loginSite(guid);
                     }
                 },
@@ -109,18 +105,18 @@ angular.module("supertests").controller("TesteController", [
         /**
          * Abre a modal com o botão de conectar ao facebook
          */
-        $scope.abrirModal = function () {
+        $scope.openModal = function () {
             $uibModal.open({
                 animation: false,
                 templateUrl: "conectar_facebook.html",
                 size: "sm",
                 controller: function ($scope, $uibModalInstance) {
-                    $scope.fecharModal = function () {
+                    $scope.closeModal = function () {
                         $uibModalInstance.close();
                     };
 
                     $scope.loginFacebook = scope.loginFacebook;
-                    scope.fecharModal = $scope.fecharModal;
+                    scope.closeModal = $scope.closeModal;
                 },
             });
         };
@@ -129,13 +125,13 @@ angular.module("supertests").controller("TesteController", [
          * Carrega mais testes abaixo do teste atual
          */
         $scope.loadingtestes = true;
-        $scope.testes = [];
-        $scope.carregarTestes = function (active) {
+        $scope.tests = [];
+        $scope.loadTests = function (active) {
             $http.get("/l").then(function (json) {
                 $scope.loadingtestes = false;
                 for (var index in json.data) {
                     if (json.data[index].id != active) {
-                        $scope.testes.push(json.data[index]);
+                        $scope.tests.push(json.data[index]);
                     }
                 }
             });

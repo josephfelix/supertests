@@ -1078,6 +1078,11 @@ angular@^1.8.2:
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.2.tgz#5983bbb5a9fa63e213cb7749199e0d352de3a2f1"
   integrity sha512-IauMOej2xEe7/7Ennahkbb5qd/HFADiNuLSESz9Q27inmi32zB0lnAsFeLEWcox3Gd1F6YhNd1CP7/9IukJ0Gw==
 
+angularjs-facebook@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/angularjs-facebook/-/angularjs-facebook-0.2.3.tgz#54830dd4aab7183e4c49e73df6b6319ed7220821"
+  integrity sha1-VIMN1Kq3GD5MSec99rYxntciCCE=
+
 angularjs-ui-bootstrap@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/angularjs-ui-bootstrap/-/angularjs-ui-bootstrap-2.5.0.tgz#c5600fe663ab509f9ca9cbf28cc163330daab249"

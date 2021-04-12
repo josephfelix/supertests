@@ -1,4 +1,4 @@
-<div class="container" ng-controller="TesteController" ng-init="checkConnection()">
+<div class="container" ng-controller="TesteController" ng-init="facebookReady">
     <div class="row">
         <!-- Container do teste -->
         <div class="col-lg-8 col-md-8 offset-2 col-sm-12 col-xs-12">
@@ -17,7 +17,7 @@
                         </h2>
                     </div>
                     <p class="teste-description"><%= test.Description %></p>
-                    <button class="btn btn-lg btn-iniciar-teste" ng-click="iniciar('<%= test.Slug %>')">
+                    <button class="btn btn-lg btn-iniciar-teste" ng-click="start('<%= test.Slug %>')">
                         Iniciar teste
                     </button>
                 </div>
@@ -34,7 +34,7 @@
         <p><strong>Carregando...</strong></p>
     </div>
 
-    <div class="mais-testes" ng-hide="loadingtestes" ng-init="carregarTestes('<%= test.ID %>')">
+    <div class="mais-testes" ng-hide="loadingtestes" ng-init="loadTests('<%= test.ID %>')">
         <h3><strong>Recomendados</strong></h3>
         <hr />
         <div class="row">
