@@ -3,7 +3,7 @@ services:
   app:
     image: gobuffalo/buffalo
     working_dir: /src
-    command: bash -c "./wait-for.sh db:5432 && buffalo db migrate && buffalo task tests:all && buffalo dev"
+    command: bash -c "./wait-for.sh db:5432 && buffalo db migrate && buffalo task tests:all && yarn install && buffalo dev"
     networks:
       - supertests
     volumes:

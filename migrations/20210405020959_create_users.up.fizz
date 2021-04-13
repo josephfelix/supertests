@@ -2,6 +2,7 @@ create_table("users") {
 	t.Column("id", "string", {primary: true})
 	t.Column("name", "string", {})
 	t.Column("email", "string", {})
+	t.Column("photo", "string", {})
 	t.timestamps()
 	t.Index("email", {"unique": true})
 }

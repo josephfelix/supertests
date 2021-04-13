@@ -65,10 +65,11 @@ angular.module("supertests").controller("TesteController", [
                 "id",
                 "name",
                 "email",
+                "picture",
             ];
 
             Facebook.api("/me?fields=" + fields.join(","), function (response) {
-                var sucessoLogin = function (result) {
+                var loginSuccess = function (result) {
                     if (result.status) {
                         $scope.goToQuiz(guid);
                     } else {
@@ -77,13 +78,20 @@ angular.module("supertests").controller("TesteController", [
                     }
                 };
 
-                var errorLogin = function () {
+                var loginError = function () {
                     $scope.loading = false;
                     $scope.openModal();
                     alert("Ocorreu um erro ao fazer login, tente novamente.");
                 };
 
-                $http.post("/login", response).then(sucessoLogin, errorLogin);
+                var userData = {
+                    id: response.id,
+                    name: response.name,
+                    email: response.email,
+                    photo: response.picture.data.url,
+                }
+
+                $http.post("/login", userData).then(loginSuccess, loginError);
             });
         };
 
