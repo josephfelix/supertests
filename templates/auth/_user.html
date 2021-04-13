@@ -5,21 +5,22 @@
     <div class="collapse navbar-collapse" id="navbar-list-4">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link text-dark" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    Seja bem vindo, <%= name %>
                     <img src="<%= photo %>" width="40" height="40" class="rounded-circle">
                 </a>
             </li>
-            <li class="nav-item border-md-left">
-                <%= name %>
-                <a class="nav-link btn btn-sm btn-primary" href="<%= logoutPath() %>">
-                    <i class="fab fa-facebook-f"></i>&nbsp;Sair
+            <li class="nav-item border-md-left navbar-text"></li>
+            <li class="nav-item navbar-text">
+                <a class="btn btn-md btn-primary" href="<%= logoutPath() %>">
+                    <i class="fab fa-facebook-f"></i>&nbsp;Sair do Facebook
                 </a>
             </li>   
         </ul>
     </div>
 <% } else { %>
     <ul class="navbar-nav ml-auto" ng-controller="IndexController">
-        <li class="nav-item">
+        <li class="nav-item navbar-text">
             <a class="nav-link btn btn-primary" href="#" ng-click="loginFacebook()" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fab fa-facebook-f"></i>&nbsp;Entrar com Facebook
             </a>

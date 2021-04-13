@@ -14,12 +14,6 @@ angular.module("supertests").controller("TesteController", [
         $scope.loading = false;
 
         /**
-         * Marca o usuário como logado
-         * @type {boolean}
-         */
-        $scope.loggedIn = false;
-
-        /**
          * Status de login do usuário no facebook
          * @type {boolean}
          */
@@ -37,7 +31,7 @@ angular.module("supertests").controller("TesteController", [
          * Chamado ao usuário clicar no botão INICIAR TESTE
          */
         $scope.start = function (guid) {
-            if ($scope.facebookReady && $scope.loggedIn) {
+            if ($scope.facebookReady && $window.loggedIn) {
                 $scope.loading = true;
                 $scope.goToQuiz(guid);
             } else {

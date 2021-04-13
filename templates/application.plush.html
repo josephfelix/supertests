@@ -26,6 +26,12 @@
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+        <%= if (isloggedin) { %>
+          window.loggedIn = true;
+        <% } else { %>
+          window.loggedIn = false;
+        <% } %>
     </script>
   </head>
   <body>
