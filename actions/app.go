@@ -7,6 +7,7 @@ import (
 	paramlogger "github.com/gobuffalo/mw-paramlogger"
 	"github.com/unrolled/secure"
 
+	"supertests/middleware"
 	"supertests/models"
 
 	"github.com/gobuffalo/buffalo-pop/v2/pop/popmw"
@@ -58,6 +59,8 @@ func App() *buffalo.App {
 
 		// Setup and use translations:
 		app.Use(translations())
+
+		app.Use(middleware.Login)
 
 		app.GET("/", HomeHandler)
 		app.GET("/l", HomeLoad)
