@@ -13,6 +13,7 @@ type LoginResult struct {
 
 func LoginHandler(context buffalo.Context) error {
 	user := models.User{}
+	session := context.Session()
 
 	if err := context.Bind(&user); err != nil {
 		return err
@@ -32,11 +33,15 @@ func LoginHandler(context buffalo.Context) error {
 		}
 	}
 
-	// TODO: Register user session
+	session.Set("loggedin", true)
+	session.Set("userid", user.ID)
+	session.Set("name", user.Name)
 
 	return context.Render(http.StatusOK, renderer.JSON(LoginResult{Status: true}))
 }
 
 func LogoutHandler(context buffalo.Context) error {
-	return context.Render(http.StatusOK, renderer.HTML("test/index.html"))
+	context.Session().Clear()
+
+	return context.Redirect(http.StatusTemporaryRedirect, "rootPath()")
 }

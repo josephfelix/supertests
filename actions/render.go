@@ -1,6 +1,8 @@
 package actions
 
 import (
+	"supertests/helpers"
+
 	"github.com/gobuffalo/buffalo/render"
 	"github.com/gobuffalo/packr/v2"
 )
@@ -21,7 +23,7 @@ func init() {
 		Helpers: render.Helpers{
 			// for non-bootstrap form helpers uncomment the lines
 			// below and import "github.com/gobuffalo/helpers/forms"
-			// forms.FormKey:     forms.Form,
+			"Session": helpers.Session,
 			// forms.FormForKey:  forms.FormFor,
 		},
 	})

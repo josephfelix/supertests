@@ -12,15 +12,19 @@ require (
 	github.com/gobuffalo/envy v1.9.0
 	github.com/gobuffalo/fizz v1.13.0 // indirect
 	github.com/gobuffalo/flect v0.2.2 // indirect
+	github.com/gobuffalo/helpers v0.6.1
 	github.com/gobuffalo/mw-csrf v0.0.0-20190129204204-25460a055517
 	github.com/gobuffalo/mw-forcessl v0.0.0-20190224202501-6d1ef7ffb276
 	github.com/gobuffalo/mw-i18n v0.0.0-20190224203426-337de00e4c33
 	github.com/gobuffalo/mw-paramlogger v0.0.0-20190224201358-0d45762ab655
 	github.com/gobuffalo/packr/v2 v2.8.0
+	github.com/gobuffalo/plush v3.8.3+incompatible
 	github.com/gobuffalo/plush/v4 v4.1.0 // indirect
 	github.com/gobuffalo/pop v4.13.1+incompatible
 	github.com/gobuffalo/pop/v5 v5.3.0
 	github.com/gobuffalo/suite v2.8.2+incompatible
+	github.com/gobuffalo/tags v2.1.7+incompatible
+	github.com/gobuffalo/tags/v3 v3.1.0
 	github.com/gobuffalo/validate/v3 v3.3.0
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/jackc/pgconn v1.8.1 // indirect
