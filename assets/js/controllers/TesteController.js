@@ -3,7 +3,8 @@ angular.module("supertests").controller("TesteController", [
     "$uibModal",
     "$http",
     "$window",
-    function ($scope, $uibModal, $http, $window) {
+    "Facebook",
+    function ($scope, $uibModal, $http, $window, Facebook) {
         var scope = $scope;
 
         /**
@@ -11,6 +12,12 @@ angular.module("supertests").controller("TesteController", [
          * @type {boolean}
          */
         $scope.loading = false;
+
+        /**
+         * Marca o usuário como logado
+         * @type {boolean}
+         */
+        $scope.loggedIn = false;
 
         /**
          * Status de login do usuário no facebook
@@ -30,7 +37,7 @@ angular.module("supertests").controller("TesteController", [
          * Chamado ao usuário clicar no botão INICIAR TESTE
          */
         $scope.start = function (guid) {
-            if ($scope.facebookReady) {
+            if ($scope.facebookReady && $scope.loggedIn) {
                 $scope.loading = true;
                 $scope.goToQuiz(guid);
             } else {
@@ -53,21 +60,14 @@ angular.module("supertests").controller("TesteController", [
          */
         $scope.loginSite = function (guid) {
             $scope.loading = true;
-            /* var fields = [
-                'id', 'name', 'age_range', 'birthday', 'cover', 'email', 'favorite_teams',
-                'favorite_athletes', 'gender', 'context'
-            ];*/
 
             var fields = [
                 "id",
                 "name",
-                "age_range",
-                "cover",
                 "email",
-                "gender",
-                "context",
             ];
-            FB.api("/me?fields=" + fields.join(","), function (response) {
+
+            Facebook.api("/me?fields=" + fields.join(","), function (response) {
                 var sucessoLogin = function (result) {
                     if (result.status) {
                         $scope.goToQuiz(guid);
@@ -91,7 +91,7 @@ angular.module("supertests").controller("TesteController", [
          * Realiza o login no facebook via JS SDK
          */
         $scope.loginFacebook = function (guid) {
-            FB.login(
+            Facebook.login(
                 function (response) {
                     if (response.authResponse) {
                         $scope.closeModal();
@@ -108,16 +108,18 @@ angular.module("supertests").controller("TesteController", [
         $scope.openModal = function () {
             $uibModal.open({
                 animation: false,
-                templateUrl: "conectar_facebook.html",
-                size: "sm",
-                controller: function ($scope, $uibModalInstance) {
-                    $scope.closeModal = function () {
-                        $uibModalInstance.close();
-                    };
+                templateUrl: "facebook.html",
+                size: "md",
+                controller: ["$scope", "$uibModalInstance", 
+                    function ($scope, $uibModalInstance) {
+                        $scope.closeModal = function () {
+                            $uibModalInstance.close();
+                        };
 
-                    $scope.loginFacebook = scope.loginFacebook;
-                    scope.closeModal = $scope.closeModal;
-                },
+                        $scope.loginFacebook = scope.loginFacebook;
+                        scope.closeModal = $scope.closeModal;
+                    }
+                ],
             });
         };
 

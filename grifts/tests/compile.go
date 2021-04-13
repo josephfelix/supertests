@@ -9,6 +9,8 @@ import (
 )
 
 func Compile(c *grift.Context) error {
+	fmt.Println("Starting quiz compilation...")
+
 	tests, err := lib.GetAllTestFiles()
 
 	if err != nil {

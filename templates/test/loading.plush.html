@@ -1,4 +1,4 @@
-<div class="container" ng-controller="LoadingController" ng-init="makeTest('{{$guid}}')">
+<div class="container" ng-controller="LoadingController" ng-init="makeTest('<%= slug %>')">
     <div class="row">
         <!-- Container do teste -->
         <div class="col-lg-8 col-md-8 offset-2 col-sm-12 col-xs-12">
@@ -6,7 +6,7 @@
                 <!-- Loading container -->
                 <div class="loading-container">
                     <div class="dots-loader"></div>
-                    <p><strong>@{{message}}</strong></p>
+                    <p><strong>{{ message }}</strong></p>
                 </div>
             </div>
 

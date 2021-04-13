@@ -6,21 +6,15 @@ import (
 
 	"github.com/gobuffalo/pop/v5"
 	"github.com/gobuffalo/validate/v3"
-	"github.com/gofrs/uuid"
 )
 
 // User is used by pop to map your users database table to your go code.
 type User struct {
-	ID               uuid.UUID `json:"id" db:"id"`
-	Name             string    `json:"name" db:"name"`
-	Email            string    `json:"email" db:"email"`
-	Gender           string    `json:"gender" db:"gender"`
-	Age              string    `json:"age" db:"age"`
-	Cover            string    `json:"cover" db:"cover"`
-	FavoriteAthletes string    `json:"favorite_athletes" db:"favorite_athletes"`
-	FavoriteTeams    string    `json:"favorite_teams" db:"favorite_teams"`
-	CreatedAt        time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt        time.Time `json:"updated_at" db:"updated_at"`
+	ID        string    `json:"id" db:"id"`
+	Name      string    `json:"name" db:"name"`
+	Email     string    `json:"email" db:"email"`
+	CreatedAt time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 }
 
 // String is not required by pop and may be deleted

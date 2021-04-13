@@ -7,7 +7,7 @@ setup: reset run
 reset:
 	sudo rm -rf node_modules
 run:
-	$(NAVIGATOR) http://127.0.0.1:1337
+	$(NAVIGATOR) http://localhost:1337
 	$(DOCKERCOMPOSE) up --build
 bash:
 	$(DOCKERCOMPOSE) exec app bash

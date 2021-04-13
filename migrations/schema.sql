@@ -115,14 +115,9 @@ ALTER SEQUENCE public.tests_id_seq OWNED BY public.tests.id;
 --
 
 CREATE TABLE public.users (
-    id uuid NOT NULL,
+    id character varying(255) NOT NULL,
     name character varying(255) NOT NULL,
     email character varying(255) NOT NULL,
-    gender character varying(255),
-    age integer,
-    cover character varying(255),
-    favorite_athletes character varying(255),
-    favorite_teams character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

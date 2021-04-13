@@ -2,9 +2,11 @@ package actions
 
 import (
 	"net/http"
+	"strings"
 	"supertests/models"
 
 	"github.com/gobuffalo/buffalo"
+	"github.com/gobuffalo/buffalo/render"
 )
 
 func TestIndex(context buffalo.Context) error {
@@ -22,5 +24,23 @@ func TestIndex(context buffalo.Context) error {
 }
 
 func TestResult(context buffalo.Context) error {
+	return context.Render(http.StatusOK, renderer.HTML("test/test.html"))
+}
+
+func TestLoading(context buffalo.Context) error {
+	referer := context.Request().Referer()
+	slug := context.Param("slug")
+
+	if !strings.Contains(referer, slug) {
+		return context.Redirect(http.StatusTemporaryRedirect,
+			"tPath()", render.Data{"slug": slug})
+	}
+
+	context.Set("slug", slug)
+
+	return context.Render(http.StatusOK, renderer.HTML("test/loading.html"))
+}
+
+func TestProcess(context buffalo.Context) error {
 	return context.Render(http.StatusOK, renderer.HTML("test/test.html"))
 }
