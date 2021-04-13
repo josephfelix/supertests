@@ -1,15 +1,28 @@
 <%= if (isloggedin) { %>
-    <ul class="media-list pull-right user-card">
-        <li class="media">
-            <div class="media-left">
-                <img src="<%= photo %>"/>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading"><%= name %></h4>
-                <a class="btn btn-primary btn-facebook btn-sm" href="<%= logoutPath() %>">
-                    <i class="fab fa-facebook-f" aria-hidden="true"></i>&nbsp;Clique para sair
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar-list-4">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="<%= photo %>" width="40" height="40" class="rounded-circle">
                 </a>
-            </div>
+            </li>
+            <li class="nav-item border-md-left">
+                <%= name %>
+                <a class="nav-link btn btn-sm btn-primary" href="<%= logoutPath() %>">
+                    <i class="fab fa-facebook-f"></i>&nbsp;Sair
+                </a>
+            </li>   
+        </ul>
+    </div>
+<% } else { %>
+    <ul class="navbar-nav ml-auto" ng-controller="IndexController">
+        <li class="nav-item">
+            <a class="nav-link btn btn-primary" href="#" ng-click="loginFacebook()" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fab fa-facebook-f"></i>&nbsp;Entrar com Facebook
+            </a>
         </li>
     </ul>
 <% } %>
