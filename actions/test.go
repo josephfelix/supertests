@@ -8,6 +8,7 @@ import (
 	"supertests/lib"
 	"supertests/models"
 	"supertests/quiz"
+	"time"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/buffalo/render"
@@ -15,7 +16,8 @@ import (
 )
 
 type TestResponse struct {
-	Status bool `json:"status"`
+	Status bool   `json:"status"`
+	Hash   string `json:"hash"`
 }
 
 func TestIndex(context buffalo.Context) error {
@@ -87,13 +89,28 @@ func TestProcess(context buffalo.Context) error {
 		return context.Error(http.StatusNotFound, err)
 	}
 
-	hash := uuidv4.NewV4()
-	filename := hash.String() + ".jpg"
+	hash := uuidv4.NewV4().String()
+	filename := hash + ".jpg"
 	err = imagebuilder.Save(img, fmt.Sprintf("public/r/%v", filename))
 
 	if err != nil {
 		return context.Error(http.StatusNotFound, err)
 	}
 
-	return context.Render(http.StatusOK, renderer.JSON(TestResponse{Status: true}))
+	result := models.Result{
+		ID:        uuidv4.NewV4().String(),
+		UserID:    session.Get("userid").(string),
+		Guid:      slug,
+		Result:    hash,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	if err := models.DB.Create(&result); err != nil {
+		return context.Error(http.StatusNotFound, err)
+	}
+
+	response := TestResponse{Status: true, Hash: hash}
+
+	return context.Render(http.StatusOK, renderer.JSON(response))
 }

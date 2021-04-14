@@ -26,9 +26,7 @@ func LoginHandler(context buffalo.Context) error {
 	}
 
 	if !exists {
-		err := models.DB.Create(&user)
-
-		if err != nil {
+		if err := models.DB.Create(&user); err != nil {
 			return err
 		}
 	}

@@ -2,16 +2,20 @@ package models
 
 import (
 	"encoding/json"
+	"time"
+
 	"github.com/gobuffalo/pop/v5"
 	"github.com/gobuffalo/validate/v3"
-	"github.com/gofrs/uuid"
-	"time"
 )
+
 // Result is used by pop to map your results database table to your go code.
 type Result struct {
-    ID uuid.UUID `json:"id" db:"id"`
-    CreatedAt time.Time `json:"created_at" db:"created_at"`
-    UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+	ID        string    `json:"id" db:"id"`
+	UserID    string    `json:"user_id" db:"userid"`
+	Guid      string    `json:"guid" db:"guid"`
+	Result    string    `json:"result" db:"result"`
+	CreatedAt time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 }
 
 // String is not required by pop and may be deleted
