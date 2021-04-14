@@ -3,6 +3,7 @@ package tests
 import (
 	"fmt"
 	"log"
+	"os"
 	"supertests/lib"
 
 	"github.com/markbates/grift/grift"
@@ -19,6 +20,7 @@ func Compile(c *grift.Context) error {
 
 	for test := range tests {
 		entry, output := lib.AssembleQuizPath(test)
+		os.Remove(output)
 
 		command := fmt.Sprintf("go build -buildmode=plugin -o %v %v", output, entry)
 

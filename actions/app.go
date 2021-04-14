@@ -69,7 +69,6 @@ func App() *buffalo.App {
 
 		app.GET("/t/{slug}/l", TestLoading)
 		app.POST("/t/{slug}/m", TestProcess)
-		app.GET("/t/{slug}/m", TestProcess)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}

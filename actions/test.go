@@ -1,6 +1,8 @@
 package actions
 
 import (
+	"fmt"
+	"image"
 	"net/http"
 	"strings"
 	"supertests/lib"
@@ -9,7 +11,12 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/buffalo/render"
+	uuidv4 "github.com/satori/go.uuid"
 )
+
+type TestResponse struct {
+	Status bool `json:"status"`
+}
 
 func TestIndex(context buffalo.Context) error {
 	test := models.Test{}
@@ -46,8 +53,8 @@ func TestLoading(context buffalo.Context) error {
 func TestProcess(context buffalo.Context) error {
 	slug := context.Param("slug")
 	session := context.Session()
-	// outputPath, _ := filepath.Abs("public/r")
 	test := models.Test{}
+	imagebuilder := lib.ImageBuilder{}
 	err := models.DB.Where("slug = ?", slug).First(&test)
 
 	if err != nil {
@@ -55,11 +62,10 @@ func TestProcess(context buffalo.Context) error {
 	}
 
 	plugin := lib.QuizLoad(test.Plugin)
-
 	quizuser, err := plugin.Lookup("User")
 
 	if err != nil {
-		panic(err)
+		return context.Error(http.StatusNotFound, err)
 	}
 
 	*quizuser.(*quiz.User) = quiz.User{
@@ -72,10 +78,22 @@ func TestProcess(context buffalo.Context) error {
 	render, err := plugin.Lookup("Render")
 
 	if err != nil {
-		panic(err)
+		return context.Error(http.StatusNotFound, err)
 	}
 
-	image, _ := render.(func() (string, error))()
+	img, err := render.(func() (image.Image, error))()
 
-	return context.Render(http.StatusOK, renderer.JSON(image))
+	if err != nil {
+		return context.Error(http.StatusNotFound, err)
+	}
+
+	hash := uuidv4.NewV4()
+	filename := hash.String() + ".jpg"
+	err = imagebuilder.Save(img, fmt.Sprintf("public/r/%v", filename))
+
+	if err != nil {
+		return context.Error(http.StatusNotFound, err)
+	}
+
+	return context.Render(http.StatusOK, renderer.JSON(TestResponse{Status: true}))
 }

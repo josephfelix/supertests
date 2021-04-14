@@ -25,3 +25,4 @@ dist/
 generated/
 .vendor/
 plugins/*.so
+public/r/*.jpg

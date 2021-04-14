@@ -6,6 +6,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/cockroachdb/cockroach-go v2.0.1+incompatible // indirect
 	github.com/fatih/color v1.10.0 // indirect
+	github.com/gabriel-vasile/mimetype v1.2.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/gobuffalo/buffalo v0.15.5
 	github.com/gobuffalo/buffalo-pop/v2 v2.3.0
@@ -34,6 +35,7 @@ require (
 	github.com/markbates/grift v1.5.0
 	github.com/microcosm-cc/bluemonday v1.0.5 // indirect
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
+	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/unrolled/secure v1.0.1
