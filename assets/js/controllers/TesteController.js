@@ -55,12 +55,7 @@ angular.module("supertests").controller("TesteController", [
         $scope.loginSite = function (guid) {
             $scope.loading = true;
 
-            var fields = [
-                "id",
-                "name",
-                "email",
-                "picture",
-            ];
+            var fields = ["id", "name", "email", "picture.type(large)"];
 
             Facebook.api("/me?fields=" + fields.join(","), function (response) {
                 var loginSuccess = function (result) {

@@ -35,6 +35,7 @@ func LoginHandler(context buffalo.Context) error {
 
 	session.Set("loggedin", true)
 	session.Set("userid", user.ID)
+	session.Set("email", user.Email)
 	session.Set("photo", user.Photo)
 	session.Set("name", user.Name)
 

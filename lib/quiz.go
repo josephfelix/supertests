@@ -3,6 +3,7 @@ package lib
 import (
 	"os"
 	"path/filepath"
+	"plugin"
 )
 
 func GetAllTestFiles() (<-chan string, error) {
@@ -45,4 +46,14 @@ func AssembleQuizPath(test string) (string, string) {
 	entryfile, _ := filepath.Abs("quiz/" + test + "/quiz.go")
 
 	return entryfile, outputfile
+}
+
+func QuizLoad(filename string) *plugin.Plugin {
+	quiz, err := plugin.Open(filename)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return quiz
 }

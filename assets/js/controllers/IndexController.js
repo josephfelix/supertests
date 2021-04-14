@@ -36,7 +36,7 @@ angular.module("supertests").controller("IndexController", [
          * @param guid
          */
         $scope.loginSite = function (guid) {
-            var fields = ["id", "name", "email", "picture"];
+            var fields = ["id", "name", "email", "picture.type(large)"];
 
             Facebook.api("/me?fields=" + fields.join(","), function (response) {
                 var loginSuccess = function (result) {

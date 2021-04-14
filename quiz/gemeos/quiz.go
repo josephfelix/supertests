@@ -2,13 +2,27 @@ package main
 
 import (
 	"fmt"
+	"supertests/lib"
 	"supertests/quiz"
 )
 
-var user quiz.User
+var User quiz.User
 
-func Render() {
-	fmt.Printf("Ola %v", user.Name)
+var builder = lib.ImageBuilder{}
+
+func Render() (string, error) {
+	images := []string{
+		"upload/como-seria-seus-filhos-gemeos/bebe01.jpg",
+		"upload/como-seria-seus-filhos-gemeos/bebe02.jpg",
+		"upload/como-seria-seus-filhos-gemeos/bebe03.jpg",
+		"upload/como-seria-seus-filhos-gemeos/bebe04.jpg",
+		"upload/como-seria-seus-filhos-gemeos/bebe05.jpg",
+	}
+
+	img := quiz.Choose(images)
+	//picture := builder.Make(User.Photo)
+
+	return fmt.Sprintf("Imagem: %v", img), nil
 }
 
 func Info() quiz.Test {

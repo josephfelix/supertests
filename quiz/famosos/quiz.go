@@ -5,10 +5,10 @@ import (
 	"supertests/quiz"
 )
 
-var user quiz.User
+var User quiz.User
 
-func Render() {
-	fmt.Printf("Ola %v", user.Name)
+func Render() (string, error) {
+	return fmt.Sprintf("Ola %v", User.Name), nil
 }
 
 func Info() quiz.Test {

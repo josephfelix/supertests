@@ -1,5 +1,9 @@
 package quiz
 
+import (
+	"math/rand"
+)
+
 type Test struct {
 	Title       string
 	Cover       string
@@ -10,11 +14,13 @@ type Test struct {
 }
 
 type User struct {
-	Name             string
-	Email            string
-	Gender           string
-	Age              string
-	Cover            string
-	FavoriteAthletes string
-	FavoriteTeams    string
+	Id    string
+	Name  string
+	Email string
+	Photo string
+}
+
+func Choose(images []string) string {
+	rnd := rand.Intn(len(images))
+	return images[rnd]
 }
