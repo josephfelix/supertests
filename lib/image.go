@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 
 	"github.com/gabriel-vasile/mimetype"
+	"github.com/nfnt/resize"
 )
 
 type ImageBuilder struct {
@@ -51,6 +52,10 @@ func (builder ImageBuilder) Decode(filename string, img io.Reader) (image.Image,
 	}
 
 	return nil, errors.New("invalid format")
+}
+
+func (builder ImageBuilder) Resize(img image.Image, width uint, height uint) image.Image {
+	return resize.Resize(width, height, img, resize.Lanczos3)
 }
 
 func (builder ImageBuilder) ResolveImageFile(filename string) (io.Reader, error) {

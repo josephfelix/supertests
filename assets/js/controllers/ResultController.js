@@ -28,14 +28,14 @@ angular.module("supertests").controller("ResultController", [
         /**
          * Carrega mais testes abaixo do teste atual
          */
-        $scope.loadingtestes = true;
-        $scope.testes = [];
-        $scope.carregarTestes = function (active) {
+        $scope.loading = true;
+        $scope.tests = [];
+        $scope.loadTests = function (active) {
             $http.get("/l").then(function (json) {
-                $scope.loadingtestes = false;
+                $scope.loading = false;
                 for (var index in json.data) {
                     if (json.data[index].id != active) {
-                        $scope.testes.push(json.data[index]);
+                        $scope.tests.push(json.data[index]);
                     }
                 }
             });

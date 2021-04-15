@@ -35,7 +35,24 @@ func TestIndex(context buffalo.Context) error {
 }
 
 func TestResult(context buffalo.Context) error {
-	return context.Render(http.StatusOK, renderer.HTML("test/test.html"))
+	test := models.Test{}
+	slug := context.Param("slug")
+	hash := context.Param("hash")
+	session := context.Session()
+
+	if err := models.DB.Where("slug = ?", slug).First(&test); err != nil {
+		return context.Error(http.StatusNotFound, err)
+	}
+
+	name := session.Get("name").(string)
+	message := strings.Replace(test.Message, "[[nome]]", name, -1)
+
+	context.Set("hash", hash)
+	context.Set("test", test)
+	context.Set("message", message)
+	context.Set("slug", slug)
+
+	return context.Render(http.StatusOK, renderer.HTML("test/result.html"))
 }
 
 func TestLoading(context buffalo.Context) error {

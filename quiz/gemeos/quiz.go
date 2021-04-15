@@ -25,13 +25,15 @@ func Render() (image.Image, error) {
 		return nil, err
 	}
 
-	picture, err := builder.Make(User.Photo)
+	facebook, err := builder.Make(User.Photo)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return builder.Insert(img, picture, 20, 80), nil
+	photoResized := builder.Resize(facebook, 260, 300)
+
+	return builder.Insert(img, photoResized, 20, 80), nil
 }
 
 func Info() quiz.Test {

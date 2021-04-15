@@ -8,7 +8,7 @@ angular.module("supertests").controller("LoadingController", [
 
         $scope.makeTest = function (guid) {
             var success = function (result) {
-                $window.location.href = "/t/" + guid + "/r/" + result.hash;
+                $window.location.href = "/t/" + guid + "/r/" + result.data.hash;
             };
 
             var failure = function () {};
