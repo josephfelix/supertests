@@ -17,3 +17,5 @@ db:
 	$(DOCKERCOMPOSE) exec db psql supertests supertests
 down:
 	$(DOCKERCOMPOSE) down
+test:
+	$(DOCKERCOMPOSE) exec app bash -c "go test -timeout 30s -run ^Test supertests/lib"

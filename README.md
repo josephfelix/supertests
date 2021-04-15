@@ -21,3 +21,9 @@ Para interromper os containers gerados e refazer o banco de dados, execute o com
 ```
 make down
 ```
+
+### Testes
+Para executar os testes, rode o seguinte comando abaixo
+```
+make test
+```
